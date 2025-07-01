@@ -46,7 +46,7 @@ def INTT(f_gorro):
 
     Esta función revierte la transformación NTT, según el Algoritmo 10 del estándar FIPS 203.
     Utiliza las constantes zeta en orden inverso (BitRev7(i) con i de 127 a 1) y una multiplicación
-    final por 3303 ≡ 256^{-1} mod q.
+    final por 3303 ≡ 128^{-1} mod q.
 
     Entrada:
     - f_gorro: lista de 256 enteros módulo q (polinomio en T_q).
@@ -73,7 +73,7 @@ def INTT(f_gorro):
 
         l = 2 * l
 
-    # Normalización final: multiplicar por n^{-1} mod q = 3303
+    # Normalización final: multiplicar por 128^{-1} mod q = 3303
     return [(x * 3303) % q for x in f]
 
 

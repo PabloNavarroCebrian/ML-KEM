@@ -11,11 +11,11 @@ class K_PKE:
         Inicializa una instancia del esquema K-PKE.
 
         Entrada:
-        - k (int): número de filas/columnas de la matriz A (dimensión del esquema).
-        - eta1 (int): parámetro de ruido para las distribuciones de s y e.
-        - eta2 (int): parámetro de ruido para las distribuciones de e1 y e2.
-        - du (int): parámetro de compresión para el componente c1 del cifrado.
-        - dv (int): parámetro de compresión para el componente c2 del cifrado.
+        - k: número de filas/columnas de la matriz A (dimensión del esquema).
+        - eta1: parámetro de ruido para las distribuciones de s y e.
+        - eta2: parámetro de ruido para las distribuciones de e1 y e2.
+        - du: parámetro de compresión para el componente c1 del cifrado.
+        - dv: parámetro de compresión para el componente c2 del cifrado.
         """
         self.__k = k
         self.__eta1 = eta1
@@ -28,11 +28,11 @@ class K_PKE:
         Genera un par de claves (pública y secreta) para el esquema K-PKE.
 
         Entrada:
-        - d (list[int]): semilla de entrada de tamaño 32 bytes.
+        - d: semilla de entrada de tamaño 32 bytes.
 
         Salida:
-        - ek_PKE (list[int]): clave pública comprimida.
-        - dk_PKE (list[int]): clave secreta comprimida (en dominio NTT).
+        - ek_PKE: clave pública comprimida.
+        - dk_PKE: clave secreta comprimida (en dominio NTT).
         """
         (rho, sigma) = G(d + [self.__k])  # Expansión determinista de la semilla en rho y sigma
         N = 0  # Contador para la función PRF
@@ -80,12 +80,12 @@ class K_PKE:
         Cifra un mensaje m utilizando la clave pública y una semilla aleatoria.
 
         Entrada:
-        - ek_PKE (list[int]): clave pública.
-        - m (list[int]): mensaje de 32 bytes a cifrar.
-        - r (list[int]): semilla aleatoria para la generación de ruido.
+        - ek_PKE: clave pública.
+        - m: mensaje de 32 bytes a cifrar.
+        - r: semilla aleatoria para la generación de ruido.
 
         Salida:
-        - c (list[int]): cifrado (c1 || c2).
+        - c: cifrado (c1 || c2).
         """
         N = 0  # Contador para PRF
         
@@ -143,11 +143,11 @@ class K_PKE:
         Descifra un cifrado c utilizando la clave secreta.
 
         Entrada:
-        - dk_PKE (list[int]): clave secreta.
-        - c (list[int]): cifrado (c1 || c2).
+        - dk_PKE: clave secreta.
+        - c: cifrado (c1 || c2).
 
         Salida:
-        - m (list[int]): mensaje descifrado como lista de 32 bytes.
+        - m: mensaje descifrado como lista de 32 bytes.
         """
         # Separación del cifrado en componentes c1 y c2
         c1 = c[:32 * self.__du * self.__k]
