@@ -1,2 +1,2 @@
 # ML-KEM
-Academic implementation of standard ML-KEM in Python.
+Implementación académica en Python completamente comentada del estándar ML-KEM.
